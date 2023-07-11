@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dad Jokes</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .papa {
+            height: 725px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: aqua;
+        }
+
+        #container {
+            width: 700px;
+            height: 300px;
+            background-color: rgb(239, 238, 238);
+            border-radius: 15px;
+            text-align: center;
+            padding: 8px;
+            
+        }
+
+        #btn {
+            position: absolute;
+            top: 60%;
+            left: 46%;
+            background-color: rgba(6, 171, 237, 0.469);
+            padding: 18px 25px;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+
+        }
+
+        #joke {
+            /* margin-top: 60px; */
+            width: 80%;
+            margin: 60px auto 40px auto;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="papa">
+        <div id="container">
+            <h2 id="joke">Loading......</h2>
+            <button id="btn">Next Joke</button>
+        </div>
+
+
+    </div>
+
+
+    <script>
+        const container = document.getElementById("container");
+        const jokes = document.getElementById("joke");
+        const btn = document.getElementById("btn");
+
+
+
+
+        const getJokes = async () => {
+            try {
+                const setHeader = {
+                    headers: {
+                        Accept: "application/json"
+                    }
+                }
+
+
+                const res = await fetch('https://icanhazdadjoke.com/', setHeader)
+                const data = await res.json();
+                jokes.innerHTML = data.joke;
+
+            }
+            catch (err) {
+                console.log("The error is ", err);
+            }
+        }
+        getJokes()
+        btn.addEventListener("click", getJokes);
+
+
+    </script>
+</body>
+
+</html>
